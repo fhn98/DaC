@@ -1,0 +1,153 @@
+Getting Dataloaders...
+48534
+19867
+19962
+Dataloaders prepared
+=========================
+epoch: 0
+=========================
+0.29941896402521945
+----> [Train] Total iteration #0: inv acc: 1.5188, inv loss: 0.3025, sparsity: 68.571251.
+acc on val ....
+env 0, acc: 0.8527
+env 1, acc: 0.9752
+env 2, acc: 0.9683
+env 3, acc: 0.7418
+all envs mean acc: 0.919464
+acc on test ....
+env 0, acc: 0.8836
+env 1, acc: 0.9713
+env 2, acc: 0.971
+env 3, acc: 0.7111
+all envs mean acc: 0.926009
+=========================
+epoch: 1
+=========================
+0.2997074216013516
+----> [Train] Total iteration #1: inv acc: 1.5219, inv loss: 0.2878, sparsity: 68.571251.
+acc on val ....
+env 0, acc: 0.9549
+env 1, acc: 0.9943
+env 2, acc: 0.8629
+env 3, acc: 0.4945
+all envs mean acc: 0.953793
+acc on test ....
+env 0, acc: 0.9596
+env 1, acc: 0.9918
+env 2, acc: 0.8423
+env 3, acc: 0.4667
+all envs mean acc: 0.95271
+=========================
+epoch: 2
+=========================
+0.3000782956278073
+----> [Train] Total iteration #2: inv acc: 1.5192, inv loss: 0.3064, sparsity: 68.571251.
+acc on val ....
+env 0, acc: 0.9568
+env 1, acc: 0.9966
+env 2, acc: 0.865
+env 3, acc: 0.3626
+all envs mean acc: 0.954648
+acc on test ....
+env 0, acc: 0.9641
+env 1, acc: 0.9969
+env 2, acc: 0.85
+env 3, acc: 0.4167
+all envs mean acc: 0.957369
+=========================
+epoch: 3
+=========================
+0.2989450694358594
+----> [Train] Total iteration #3: inv acc: 1.5229, inv loss: 0.2612, sparsity: 68.571251.
+acc on val ....
+env 0, acc: 0.8787
+env 1, acc: 0.975
+env 2, acc: 0.9582
+env 3, acc: 0.7637
+all envs mean acc: 0.92928
+acc on test ....
+env 0, acc: 0.9055
+env 1, acc: 0.9704
+env 2, acc: 0.9585
+env 3, acc: 0.7278
+all envs mean acc: 0.934976
+=========================
+epoch: 4
+=========================
+0.3005933984423291
+----> [Train] Total iteration #4: inv acc: 1.5245, inv loss: 0.2823, sparsity: 68.571251.
+acc on val ....
+env 0, acc: 0.8988
+env 1, acc: 0.9825
+env 2, acc: 0.9513
+env 3, acc: 0.7033
+all envs mean acc: 0.939447
+acc on test ....
+env 0, acc: 0.9204
+env 1, acc: 0.979
+env 2, acc: 0.9516
+env 3, acc: 0.6944
+all envs mean acc: 0.944394
+=========================
+epoch: 5
+=========================
+0.2989038612106977
+----> [Train] Total iteration #5: inv acc: 1.5301, inv loss: 0.2198, sparsity: 68.571251.
+acc on val ....
+env 0, acc: 0.8244
+env 1, acc: 0.9561
+env 2, acc: 0.9802
+env 3, acc: 0.8297
+all envs mean acc: 0.901847
+acc on test ....
+env 0, acc: 0.8581
+env 1, acc: 0.9521
+env 2, acc: 0.977
+env 3, acc: 0.8
+all envs mean acc: 0.907825
+=========================
+epoch: 6
+=========================
+0.298532987184242
+----> [Train] Total iteration #6: inv acc: 1.5303, inv loss: 0.1992, sparsity: 68.571251.
+acc on val ....
+env 0, acc: 0.9433
+env 1, acc: 0.9935
+env 2, acc: 0.9005
+env 3, acc: 0.5055
+all envs mean acc: 0.953994
+acc on test ....
+env 0, acc: 0.9504
+env 1, acc: 0.9934
+env 2, acc: 0.8883
+env 3, acc: 0.4722
+all envs mean acc: 0.954614
+=========================
+epoch: 7
+=========================
+0.2981621131577863
+----> [Train] Total iteration #7: inv acc: 1.5294, inv loss: 0.2000, sparsity: 68.571251.
+acc on val ....
+env 0, acc: 0.9264
+env 1, acc: 0.9924
+env 2, acc: 0.9228
+env 3, acc: 0.522
+all envs mean acc: 0.949665
+acc on test ....
+env 0, acc: 0.9388
+env 1, acc: 0.9924
+env 2, acc: 0.9169
+env 3, acc: 0.5222
+all envs mean acc: 0.95256
+best model acc on val:
+env 0, acc: 0.8244
+env 1, acc: 0.9561
+env 2, acc: 0.9802
+env 3, acc: 0.8297
+all envs mean acc: 0.901847
+best model acc on test:
+env 0, acc: 0.8581
+env 1, acc: 0.9521
+env 2, acc: 0.977
+env 3, acc: 0.8
+all envs mean acc: 0.907825
