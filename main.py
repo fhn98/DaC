@@ -5,7 +5,7 @@ import random
 import argparse
 import copy
 from models import ResNet50
-from data import get_loaders
+from data import *
 from test import test
 from train import train_masked_low_loss
 from utils import weight_init, compute_loss_quantiles
@@ -19,6 +19,7 @@ def get_loaders(dataset, path, batch_size= 32, mask_path = None, get_mask = Fals
         return get_metashift_loaders(batch_size = batch_size, path = path, mask_path = mask_path, get_mask = get_mask, get_names = get_names)
     elif dataset == 'Domino':
         return get_domino_loaders(path = path, batch_size = batch_size, mask_path = mask_path, get_mask = get_mask, get_names = get_names)
+
 
 
 def main(args):
