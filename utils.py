@@ -1,9 +1,34 @@
 import torch
 import torch.nn as nn
+import torch.optim as optim
 from einops import rearrange
 from tqdm import tqdm
 import numpy as np
+from data import *
 
+def get_optimizer(parameters, learning_rate, optimizer_name, weight_decay=0):
+        if optimizer_name == 'Adam':
+            optimizer = optim.Adam(parameters, lr=learning_rate, weight_decay=weight_decay)
+        elif optimizer_name == 'AdamW':
+            optimizer = optim.AdamW(parameters, lr=learning_rate, weight_decay=weight_decay)
+        elif optimizer_name == 'SGD':
+            optimizer = optim.SGD(parameters, lr=learning_rate, momentum=0.9, weight_decay=weight_decay)
+        else:
+            raise ValueError("Invalid optimizer type. Supported options are 'Adam', 'AdamW', and 'SGD'.")
+
+        return optimizer
+
+def get_scheduler(optimizer, args):
+    if args.scheduler == 'none':
+        return None
+
+    if args.scheduler == 'StepLr':
+        scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=args.step_size, gamma=args.gamma)
+
+    else:
+        raise ValueError("Invalid scheduler type. Supported options are 'none', 'StepLr'.")
+
+    return scheduler
 
 def cal_sparsity(z):
     sparsity = torch.sum(torch.sum(torch.sum(z, dim=-1), -1))/(torch.numel(z[0]))

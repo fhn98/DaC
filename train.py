@@ -120,3 +120,41 @@ def train_masked_low_loss(dataset, cnn_image_encoder, base_model, opt, scheduler
       scheduler.step()
 
     return step+1
+
+
+def train_erm(dataloader, model, opt, scheduler, step, device=torch.device('cuda')):
+    criterion =  nn.CrossEntropyLoss()
+
+    ### average loss
+    avg_acc = 0
+    avg_loss = 0
+    count = 0
+
+    model.train()
+    for (batch, (inputs, labels, _, _)) in enumerate(tqdm(dataloader)):
+        count += inputs.shape[0]
+
+        inputs = inputs.to(device)
+        labels = labels.to(device)
+
+        opt.zero_grad()
+        logits = model(inputs)
+        total_loss = criterion(logits, labels.float())
+        total_loss.backward()
+        opt.step()
+
+        avg_loss += total_loss
+        avg_acc += torch.sum(torch.argmax(logits, dim=1)==torch.argmax(labels, dim=1))
+
+    # results
+    avg_acc = avg_acc/(count)
+    avg_loss = avg_loss/(count)
+
+    if not scheduler==None:
+        scheduler.step()
+
+    print("{:s}{:d}: {:s}{:.4f}, {:s}{:.4f}.".format(
+        "----> [Train] Total iteration #", step, "acc: ",
+        avg_acc, "loss: ", avg_loss), flush=True)
+
+    return step+1
