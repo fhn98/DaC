@@ -106,7 +106,7 @@ python main.py [--lr LEARNING_RATE] [--optimizer {Adam,SGD}] [--scheduler {none,
 - `--invert_mask`: Flag for inverting the masks (default: `False`).
 - `--quantile`: Quantile of low-loss selected samples (default: `0.8`).
 - `--alpha`: Coefficient of combined images loss (default: `6`).
-- `--seed`: Seed (default: `0`).
+- `--seed`: Seed (default: `10`).
 
 
 ## Citation
