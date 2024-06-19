@@ -6,7 +6,7 @@ import numpy as np
 
 
 def cal_sparsity(z):
-    sparsity = torch.sum(torch.sum(torch.sum(z, dim=-1), -1))/(224*224)
+    sparsity = torch.sum(torch.sum(torch.sum(z, dim=-1), -1))/(torch.numel(z))
     return sparsity
 
 def weight_init(m):
