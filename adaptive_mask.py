@@ -25,7 +25,7 @@ def mask_heatmap_using_threshold(heat_maps, k):
 
 
 def save_masks (losses, path, heat_maps, save_dir):
-    range = [0.3, 0.4, 0.5, 0.6, 0.8]
+    range = [0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
     kneedle = KneeLocator(range, losses, online=True, S=1.0, curve="convex", direction="increasing")
     t = kneedle.elbow
     if t == None:
@@ -63,7 +63,7 @@ def main(args):
             heat_maps = heat_map_generator(image)
 
             criterion = nn.CrossEntropyLoss(reduction='none')
-            range = [0.3, 0.4, 0.5, 0.6, 0.8]
+            range = [0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
             masks = get_quantile_masks(heat_maps, range)
 
             losses = []
