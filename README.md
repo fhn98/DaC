@@ -50,14 +50,13 @@ We use the implementation provided by [DISC repo](https://github.com/Wuyxin/DISC
 python main.py --experiment ERM --dataset WaterBirds --data_path /path/to/waterbird_complete95_forest2water2 --optimizer SGD --lr 1e-3 --weight_decay 1e-3 --epochs 100 --batch_size 128
 ```
 
-2. **DaC**
-   **Adaptive Masking**
+2. **Adaptive Masking**
 Before running the main experiment, you first need to run `adaptive_mask.py` to extract and save the masks for images by adaptive masking. Here is an Example for the Waterbirds dataset.
 ```bash
 python adaptive_mask.py --dataset WaterBirds --data_path /path/to/waterbird_complete95_forest2water2 --model_path /path/to/ERM model --batch_size 128
 ```
 
-**DaC Main Experiment**
+3. **DaC Main Experiment**
 Example for the Waterbirds dataset
 ```bash
 python main.py --experiment DaC --dataset WaterBirds --data_path /path/to/waterbird_complete95_forest2water2 --mask_path /path/to/saved masks --save_path /path/to/saved/checkpoints --optimizer Adam --scheduler StepLr --step_size 5 --gamma 0.5 --lr 5e-3 --weight_decay 0 --epochs 20 --alpha 10 --quantile 0.8 --batch_size 64
