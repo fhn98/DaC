@@ -110,29 +110,28 @@ def main(args):
 if __name__ == "__main__":
     seed = 10
     parser = argparse.ArgumentParser()
-    default_data_path = '/HDD/Datasets/Waterbirds_dataset/waterbird_complete95_forest2water2/'
-    default_mask_path = '/home/f_hosseini/data/waterbirds_masks'
-    default_model_path = '/home/f_hosseini/dfr-ckpts/waterbirds/erm_seed1/final_checkpoint.pt'
-    default_save_path = '/home/f_hosseini/results/wb/'
-    parser.add_argument("--data_path", type=str, default=default_data_path, help="data path")
+    default_mask_path = './data/masks/'
+    default_model_path = './ckpts/'
+    default_save_path = './'
+    parser.add_argument("--data_path", type=str, help="data path")
     parser.add_argument("--mask_path", type=str, default=default_mask_path, help="mask path")
     parser.add_argument("--model_path", type=str, default=default_model_path, help="pretrained model path")
     parser.add_argument("--save_path", type=str, default=default_save_path, help="path to save checkpoints")
     parser.add_argument("--experiment", type=str, default='DaC', help="The experiment to run", choices=['ERM', 'DaC'])
-    parser.add_argument("--dataset", type=str, default='WaterBirds')
+    parser.add_argument("--dataset", type=str)
     parser.add_argument("--batch_size", type=int, default=32, help="batch_size")
     parser.add_argument("--num_classes", type=int, default=2)
     parser.add_argument("--num_envs", type=int, default=4)
     parser.add_argument("--num_test_envs", type=int, default=4)
-    parser.add_argument("--num_epochs", type=int, default=15)
+    parser.add_argument("--num_epochs", type=int, default=20)
     parser.add_argument("--lr", type=float, default=0.005)
     parser.add_argument("--weight_decay", type=float, default=0)
     parser.add_argument("--optimizer", type=str, default='Adam', choices=['Adam', 'SGD'])
     parser.add_argument("--scheduler", type=str, default='none', choices=['none', 'StepLr'])
     parser.add_argument("--step_size", type=float, default=5)
     parser.add_argument("--gamma", type=float, default=0.5)
-    parser.add_argument("--alpha", type=float, default=10)
-    parser.add_argument("--quantile", type=float, default=0.6)
+    parser.add_argument("--alpha", type=float, default=6)
+    parser.add_argument("--quantile", type=float, default=0.8)
     parser.add_argument("--invert_mask", type=bool, default=False)
     parser.add_argument("--seed", type=int, default=10)
 
