@@ -34,8 +34,8 @@ You can download a tarball of this dataset [here](https://nlp.stanford.edu/data/
 
 ### Dominoes
 
-The code for preparing the Dominoes datasets can is provided in `./notebooks/Dominoes.ipynb`. The code is mainly adapted from [this repo](https://github.com/mpagli/Agree-to-Disagree/tree/main).
-You can download a presaved instance of the dataset from [this link](https://drive.google.com/drive/folders/1iXOFqxA6IAWTS_MD9xy3SD7FMTGChC2t?usp=sharing).
+The code for preparing the Dominoes datasets can is provided in [this repo](https://github.com/mpagli/Agree-to-Disagree/tree/main). 
+You can download a saved instance of the dataset from [this link](https://drive.google.com/drive/folders/1iXOFqxA6IAWTS_MD9xy3SD7FMTGChC2t?usp=sharing).
 
 ### MetaShift
 
@@ -47,7 +47,7 @@ We use the implementation provided by [DISC repo](https://github.com/Wuyxin/DISC
 1. **ERM Training**
  Waterbirds Example
 ```bash
-python main.py --experiment ERM --dataset WaterBirds --data_path /path/to/waterbird_complete95_forest2water2 --optimizer SGD --lr 1e-3 --weight_decay 1e-3 --epochs 100 --batch_size 128
+python main.py --experiment ERM --dataset WaterBirds --data_path /path/to/waterbird_complete95_forest2water2 --optimizer SGD --lr 1e-3 --weight_decay 1e-3 --num_epochs 100 --batch_size 128
 ```
 
 2. **Adaptive Masking**
@@ -59,7 +59,7 @@ python adaptive_mask.py --dataset WaterBirds --data_path /path/to/waterbird_comp
 3. **DaC Main Experiment**
 Example for the Waterbirds dataset
 ```bash
-python main.py --experiment DaC --dataset WaterBirds --data_path /path/to/waterbird_complete95_forest2water2 --mask_path /path/to/saved masks --save_path /path/to/saved/checkpoints --optimizer Adam --scheduler StepLr --step_size 5 --gamma 0.5 --lr 5e-3 --weight_decay 0 --epochs 20 --alpha 10 --quantile 0.8 --batch_size 64
+python main.py --experiment DaC --dataset WaterBirds --data_path /path/to/waterbird_complete95_forest2water2 --mask_path /path/to/saved masks --save_path /path/to/saved/checkpoints --optimizer Adam --scheduler StepLr --step_size 5 --gamma 0.5 --lr 5e-3 --weight_decay 0 --num_epochs 20 --alpha 10 --quantile 0.8 --batch_size 64
 ```
 
 
@@ -72,7 +72,7 @@ python main.py [--lr LEARNING_RATE] [--optimizer {Adam,SGD}] [--scheduler {none,
                [--data_path DATASET_PATH] [--mask_path MASK_PATH]  [--save_path SAVE_PATH]
                [--num_envs NUM_ENVS] [--num_test_envs NUM_TEST_ENVS] [--num_classes NUM_CLASSES]
                [--weight_decay WEIGHT_DECAY] [--step_size STEP_SIZE] [--gamma GAMMA]
-               [--epochs EPOCHS] [--model_path MODEL_PATH] [--batch_size BATCH_SIZE]
+               [--num_epochs NUM_EPOCHS] [--model_path MODEL_PATH] [--batch_size BATCH_SIZE]
                [--invert_mask INVERT_MASK] [--quantile QUANTILE] [--alpha ALPHA] [--seed SEED]
 ```
 
@@ -92,7 +92,7 @@ python main.py [--lr LEARNING_RATE] [--optimizer {Adam,SGD}] [--scheduler {none,
 - `--weight_decay`: Weight decay (default: `0`).
 - `--step_size`: Step Size for StepLr scheduler (default: `5`).
 - `--gamma`: Gamma parameter in StepLr scheduler (default: `0.5`)
-- `--epochs`: Number of epochs (default: `20`).
+- `--num_epochs`: Number of epochs (default: `20`).
 - `--model_path`: Path to the ERM model (default: `./ckpts/`).
 - `--batch_size`: Batch size (default: `32`).
 - `--invert_mask`: Flag for inverting the masks (default: `False`).
@@ -100,6 +100,21 @@ python main.py [--lr LEARNING_RATE] [--optimizer {Adam,SGD}] [--scheduler {none,
 - `--alpha`: Coefficient of combined images loss (default: `6`).
 - `--seed`: Seed (default: `0`).
 
+
+## Citation
+
+If you use this code in your research, please cite our paper:
+
+```bibtex
+@InProceedings{Noohdani_2024_CVPR,
+    author    = {Noohdani, Fahimeh Hosseini and Hosseini, Parsa and Parast, Aryan Yazdan and Araghi, Hamidreza Yaghoubi and Baghshah, Mahdieh Soleymani},
+    title     = {Decompose-and-Compose: A Compositional Approach to Mitigating Spurious Correlation},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2024},
+    pages     = {27662-27671}
+}
+```
 
 
 
