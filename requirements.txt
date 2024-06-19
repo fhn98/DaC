@@ -1,0 +1,10 @@
+einops==0.8.0
+grad_cam==1.5.2
+kneed==0.8.5
+numpy==2.0.0
+pandas==2.2.2
+Pillow==10.3.0
+scikit_learn==1.4.2
+torch==1.13.1+cu116
+torchvision==0.14.1+cu116
+tqdm==4.66.4
