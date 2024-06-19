@@ -101,5 +101,20 @@ python main.py [--lr LEARNING_RATE] [--optimizer {Adam,SGD}] [--scheduler {none,
 - `--seed`: Seed (default: `0`).
 
 
+## Citation
+
+If you use this code in your research, please cite our paper:
+
+```bibtex
+@InProceedings{Noohdani_2024_CVPR,
+    author    = {Noohdani, Fahimeh Hosseini and Hosseini, Parsa and Parast, Aryan Yazdan and Araghi, Hamidreza Yaghoubi and Baghshah, Mahdieh Soleymani},
+    title     = {Decompose-and-Compose: A Compositional Approach to Mitigating Spurious Correlation},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2024},
+    pages     = {27662-27671}
+}
+```
+
 
 
