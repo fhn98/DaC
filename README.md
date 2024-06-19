@@ -34,8 +34,8 @@ You can download a tarball of this dataset [here](https://nlp.stanford.edu/data/
 
 ### Dominoes
 
-The code for preparing the Dominoes datasets can is provided in `./notebooks/Dominoes.ipynb`. The code is mainly adapted from [this repo](https://github.com/mpagli/Agree-to-Disagree/tree/main).
-You can download a presaved instance of the dataset from [this link](https://drive.google.com/drive/folders/1iXOFqxA6IAWTS_MD9xy3SD7FMTGChC2t?usp=sharing).
+The code for preparing the Dominoes datasets can is provided in [this repo](https://github.com/mpagli/Agree-to-Disagree/tree/main). 
+You can download a saved instance of the dataset from [this link](https://drive.google.com/drive/folders/1iXOFqxA6IAWTS_MD9xy3SD7FMTGChC2t?usp=sharing).
 
 ### MetaShift
 
