@@ -59,7 +59,7 @@ python adaptive_mask.py --dataset WaterBirds --data_path /path/to/waterbird_comp
 3. **DaC Main Experiment**
 Example for the Waterbirds dataset
 ```bash
-python main.py --experiment DaC --dataset WaterBirds --data_path /path/to/waterbird_complete95_forest2water2 --mask_path /path/to/saved masks --save_path /path/to/saved/checkpoints --optimizer Adam --scheduler StepLr --step_size 5 --gamma 0.5 --lr 5e-3 --weight_decay 0 --num_epochs 20 --alpha 10 --quantile 0.8 --batch_size 64
+python main.py --experiment DaC --dataset WaterBirds --data_path /path/to/waterbird_complete95_forest2water2 --mask_path /path/to/saved masks --save_path /path/to/saved/checkpoints --optimizer Adam --scheduler StepLr --step_size 5 --gamma 0.5 --lr 5e-3 --weight_decay 0 --num_epochs 20 --alpha 10 --quantile 0.6 --batch_size 64
 ```
 
 
