@@ -131,7 +131,7 @@ def train_erm(dataloader, model, opt, scheduler, step, device=torch.device('cuda
     count = 0
 
     model.train()
-    for (batch, (inputs, labels, _, _)) in enumerate(tqdm(dataloader)):
+    for (batch, (inputs, labels, _)) in enumerate(tqdm(dataloader)):
         count += inputs.shape[0]
 
         inputs = inputs.to(device)

@@ -13,15 +13,14 @@ from data.utils import get_loaders
 
 def main(args):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-    print('Getting Dataloaders...')
-    trainloader, valloader, testloader = get_loaders(args.dataset, path=args.data_path, mask_path=args.mask_path,
-                                                     batch_size=args.batch_size, get_mask=True)
-
-    print('Dataloaders prepared')
     model = ResNet50().to(device)
 
     if not args.experiment == 'ERM':
+        print('Getting Dataloaders...')
+        trainloader, valloader, testloader = get_loaders(args.dataset, path=args.data_path, mask_path=args.mask_path,
+                                                         batch_size=args.batch_size, get_mask=True)
+        print('Dataloaders prepared')
+
         model.load_state_dict(torch.load(args.model_path))
 
         model.eval()
@@ -43,6 +42,11 @@ def main(args):
             p.requires_grad = True
 
     if args.experiment == 'ERM':
+        print('Getting Dataloaders...')
+        trainloader, valloader, testloader = get_loaders(args.dataset, path=args.data_path, mask_path=args.mask_path,
+                                                         batch_size=args.batch_size, get_mask=False)
+        print('Dataloaders prepared')
+
         trainable_parameters = model.parameters()
 
     else:
@@ -104,8 +108,8 @@ def main(args):
     print('best model acc on test:')
     test(testloader, model, args)
 
-    torch.save(model.state_dict(), args.save_path + f'alpha{args.alpha}_lt{args.quantile}_bs{args.batch_size}.model')
-
+    save_path = os.path.join(args.save_path, f'alpha{args.alpha}_lt{args.quantile}_bs{args.batch_size}.model')
+    torch.save(model.state_dict(), args.save_path + save_path)
 
 if __name__ == "__main__":
     seed = 10
