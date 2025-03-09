@@ -124,6 +124,7 @@ class MetaDatasetCatDog(Dataset):
         if self.get_mask:
             mask = np.load(os.path.join(self.mask_path, f'{idx}.npy'))
             ret.append(mask)
+
         if self.get_names:
             ret.append(str(idx))
 

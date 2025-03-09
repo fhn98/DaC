@@ -13,12 +13,12 @@ def test(dataset, model, args, device = torch.device('cuda')):
     avg_acc_envs = [0] * args.num_test_envs
 
     model.eval()
-    for (batch, (inputs, labels, envs, _)) in enumerate(tqdm(dataset)):
+    for (batch, batch_items) in enumerate(tqdm(dataset)):
         count += 1
 
-        inputs = inputs.to(device)
-        labels = labels.to(device)
-        envs = envs.to(device)
+        inputs = batch_items[0].to(device)
+        labels = batch_items[1].to(device)
+        envs = batch_items[2].to(device)
 
         logits = model(inputs)
 

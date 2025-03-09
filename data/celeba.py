@@ -79,6 +79,7 @@ class celebADataset(Dataset):
             mask = np.load(mask_filename).astype(int)
             ret.append(np.squeeze(mask, 1))
 
+
         if self.get_names:
             ret.append(self.filename_array[idx])
 

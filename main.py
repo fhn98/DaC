@@ -99,6 +99,13 @@ def main(args):
         print('acc on test ....')
         test(testloader, model, args)
 
+    if args.experiment == "ERM":
+        save_path = os.path.join(args.save_path,
+                                 f'epochs{args.num_epochs}_opt-{args.optimizer}_bs{args.batch_size}_lr{args.lr}_wd{args.weight_decay}')
+    else:
+        save_path = os.path.join(args.save_path, f'alpha{args.alpha}_lt{args.quantile}_bs{args.batch_size}')
+
+    torch.save(model.state_dict(), f"{save_path}_last.model")
     model.load_state_dict(best_model.state_dict())
     model.eval()
 
@@ -108,8 +115,8 @@ def main(args):
     print('best model acc on test:')
     test(testloader, model, args)
 
-    save_path = os.path.join(args.save_path, f'alpha{args.alpha}_lt{args.quantile}_bs{args.batch_size}.model')
-    torch.save(model.state_dict(), args.save_path + save_path)
+
+    torch.save(model.state_dict(), f"{save_path}_best.model")
 
 if __name__ == "__main__":
     seed = 10
