@@ -102,10 +102,14 @@ def get_waterbird_dataloader(split, transform, path, batch_size, mask_path = Non
     return dataloader
 
 
-def get_waterbird_loaders(path, batch_size, mask_path=None, get_mask = False, get_names = False):
-    t_train = get_transform_cub(True)
+def get_waterbird_loaders(path, batch_size, mask_path=None, get_mask = False, get_names = False, use_aug = False):
+    if use_aug:
+        t_train = get_transform_cub(True)
+    else:
+        t_train = get_transform_cub(False)
+
     t_tst = get_transform_cub(False)
-    trainloader = get_waterbird_dataloader('train', t_tst, path, batch_size, mask_path = mask_path, get_mask = get_mask, get_names = get_names)
+    trainloader = get_waterbird_dataloader('train', t_train, path, batch_size, mask_path = mask_path, get_mask = get_mask, get_names = get_names)
     valloader = get_waterbird_dataloader('val', t_tst, path, batch_size, mask_path = mask_path, get_mask = get_mask, get_names = get_names)
     testloader = get_waterbird_dataloader('test', t_tst, path, batch_size, mask_path = mask_path, get_mask = get_mask, get_names = get_names)
 

@@ -41,7 +41,7 @@ class Dominoes (Dataset):
         return tuple(ret)
 
 
-def get_domino_loaders(path, batch_size = 32, mask_path = None, get_mask = False, get_names = False):
+def get_domino_loaders(path, batch_size = 32, mask_path = None, get_mask = False, get_names = False, use_aug = False):
     trainset = Dominoes('train', path = path, mask_path=mask_path, get_mask = get_mask, get_names=get_names)
     valset = Dominoes('val', path=path, mask_path=mask_path, get_mask=get_mask, get_names=get_names)
     testset = Dominoes('test', path=path, mask_path=mask_path, get_mask=get_mask, get_names=get_names)

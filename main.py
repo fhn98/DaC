@@ -18,7 +18,7 @@ def main(args):
     if not args.experiment == 'ERM':
         print('Getting Dataloaders...')
         trainloader, valloader, testloader = get_loaders(args.dataset, path=args.data_path, mask_path=args.mask_path,
-                                                         batch_size=args.batch_size, get_mask=True)
+                                                         batch_size=args.batch_size, get_mask=True, use_aug = False)
         print('Dataloaders prepared')
 
         model.load_state_dict(torch.load(args.model_path))
@@ -44,7 +44,7 @@ def main(args):
     if args.experiment == 'ERM':
         print('Getting Dataloaders...')
         trainloader, valloader, testloader = get_loaders(args.dataset, path=args.data_path, mask_path=args.mask_path,
-                                                         batch_size=args.batch_size, get_mask=False)
+                                                         batch_size=args.batch_size, get_mask=False, use_aug = True)
         print('Dataloaders prepared')
 
         trainable_parameters = model.parameters()
@@ -80,30 +80,38 @@ def main(args):
             global_step = train_masked_low_loss(trainloader, model, base_model, model_optimizer,
                                                 scheduler, global_step, t=t, args=args)
 
+            # dev
+            print('acc on val ....')
+            avg_acc, envs_acc = test(valloader, model, args)
+            if min(envs_acc) > best_worst:
+                best_worst = min(envs_acc)
+                best_model = copy.deepcopy(model)
+                best_avg = avg_acc
+
+            elif (min(envs_acc) == best_worst and avg_acc > best_avg):
+                best_worst = min(envs_acc)
+                best_model = copy.deepcopy(model)
+                best_avg = avg_acc
+
         else:
             global_step = train_erm(trainloader, model, model_optimizer, scheduler, global_step)
 
-        # dev
-        print('acc on val ....')
-        avg_acc, envs_acc = test(valloader, model, args)
-        if min(envs_acc) > best_worst:
-            best_worst = min(envs_acc)
-            best_model = copy.deepcopy(model)
-            best_avg = avg_acc
-
-        elif (min(envs_acc) == best_worst and avg_acc > best_avg):
-            best_worst = min(envs_acc)
-            best_model = copy.deepcopy(model)
-            best_avg = avg_acc
+            # dev
+            print('acc on val ....')
+            avg_acc, envs_acc = test(valloader, model, args)
+            if avg_acc > best_worst:
+                best_worst = min(envs_acc)
+                best_model = copy.deepcopy(model)
+                best_avg = avg_acc
 
         print('acc on test ....')
         test(testloader, model, args)
 
     if args.experiment == "ERM":
         save_path = os.path.join(args.save_path,
-                                 f'epochs{args.num_epochs}_opt-{args.optimizer}_bs{args.batch_size}_lr{args.lr}_wd{args.weight_decay}')
+                                 f'seed{args.seed}_epochs{args.num_epochs}_opt-{args.optimizer}_bs{args.batch_size}_lr{args.lr}_wd{args.weight_decay}')
     else:
-        save_path = os.path.join(args.save_path, f'alpha{args.alpha}_lt{args.quantile}_bs{args.batch_size}')
+        save_path = os.path.join(args.save_path, f'seed{args.seed}_alpha{args.alpha}_lt{args.quantile}_bs{args.batch_size}')
 
     torch.save(model.state_dict(), f"{save_path}_last.model")
     model.load_state_dict(best_model.state_dict())

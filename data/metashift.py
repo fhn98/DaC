@@ -53,7 +53,7 @@ class Subset(torch.utils.data.Dataset):
 
 
 class MetaDatasetCatDog(Dataset):
-    def __init__(self, root_dir, group_id=None, mask_path = None, get_mask = False, get_names = False):
+    def __init__(self, root_dir, group_id=None, mask_path = None, get_mask = False, get_names = False, use_aug = False):
         self.root_dir = root_dir
         self.RGB = True
 
@@ -102,7 +102,11 @@ class MetaDatasetCatDog(Dataset):
             self.y_array = self.y_array[idxes]
             self.y_array_onehot = self.y_array_onehot[idxes]
 
-        self.train_transform = get_transform_metashift(train=False)
+        if use_aug:
+            self.train_transform = get_transform_metashift(train=True)
+        else:
+            self.train_transform = get_transform_metashift(train=False)
+
         self.eval_transform = get_transform_metashift(train=False)
 
         self.n_groups = len(np.unique(self.group_array))
@@ -226,10 +230,10 @@ def get_transform_metashift(train):
     return transform
 
 
-def get_metashift_loaders(batch_size, path, mask_path = None, get_mask = False, get_names = False):
+def get_metashift_loaders(batch_size, path, mask_path = None, get_mask = False, get_names = False, use_aug = False):
     loader_kwargs = {'batch_size': batch_size, 'num_workers': 4, 'pin_memory': False}
 
-    full_dataset = MetaDatasetCatDog(root_dir=path, mask_path=mask_path, get_mask=get_mask, get_names=get_names)
+    full_dataset = MetaDatasetCatDog(root_dir=path, mask_path=mask_path, get_mask=get_mask, get_names=get_names, use_aug = use_aug)
     splits = ['train', 'val', 'test']
     subsets = full_dataset.get_splits(splits=splits, train_frac=1.0)
     train_data, val_data, test_data = [subsets[split] for split in splits]

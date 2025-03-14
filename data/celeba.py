@@ -170,8 +170,11 @@ def get_transform_celeba(train):
 
     return transform
 
-def get_celeba_loaders(path, mask_path, batch_size, get_mask=False, get_names=False):
-    transforms_train = get_transform_celeba(True)
+def get_celeba_loaders(path, mask_path, batch_size, get_mask=False, get_names=False, use_aug = False):
+    if use_aug:
+        transforms_train = get_transform_celeba(True)
+    else:
+        transforms_train = get_transform_celeba(False)
     transforms_test = get_transform_celeba(False)
 
     trainloader = get_loader(path, mask_path, 'train', transform=transforms_train, batch_size=batch_size, get_mask=get_mask, get_names=get_names)

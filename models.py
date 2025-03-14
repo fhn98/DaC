@@ -8,7 +8,7 @@ class ResNet50(nn.Module):
     def __init__(self):
         super().__init__()
 
-        self.model = torchvision.models.resnet50(pretrained=False)
+        self.model = torchvision.models.resnet50(pretrained=True)
         d = self.model.fc.in_features
         self.model.fc = nn.Linear(d, 2)
 
@@ -20,7 +20,7 @@ class ResNet18(nn.Module):
     def __init__(self):
         super().__init__()
 
-        self.model = torchvision.models.resnet18(pretrained=False)
+        self.model = torchvision.models.resnet18(pretrained=True)
         d = self.model.fc.in_features
         self.model.fc = nn.Linear(d, 2)
 

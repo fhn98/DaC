@@ -86,8 +86,8 @@ def main(args):
 if __name__ == "__main__":
     seed = 30
     parser = argparse.ArgumentParser()
-    default_data_path = '/home/f_hosseini/data/metashifts/metashifts/MetaDatasetCatDog'
-    default_model_path = '/home/f_hosseini/dfr-ckpts/metashift/metashift_erm_run1.pt'
+    default_data_path = './'
+    default_model_path = './'
     parser.add_argument("--data_path", type=str, default=default_data_path, help="data path")
     parser.add_argument("--model_path", type=str, default=default_model_path, help="erm model path")
     parser.add_argument("--dataset", type=str, default='MetaShift')
