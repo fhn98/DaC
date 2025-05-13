@@ -18,7 +18,7 @@ def main(args):
     if not args.experiment == 'ERM':
         print('Getting Dataloaders...')
         trainloader, valloader, testloader = get_loaders(args.dataset, path=args.data_path, mask_path=args.mask_path,
-                                                         batch_size=args.batch_size, get_mask=True, use_aug = False)
+                                                         batch_size=args.batch_size, get_mask=True, use_aug = False, balance = True)
         print('Dataloaders prepared')
 
         model.load_state_dict(torch.load(args.model_path))

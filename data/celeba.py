@@ -13,7 +13,7 @@ import random
 
 
 class celebADataset(Dataset):
-    def __init__(self, phase, root_dir, mask_path, transform = transforms.Compose([transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]), get_mask = False, get_names = False):
+    def __init__(self, phase, root_dir, mask_path, transform = transforms.Compose([transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]), get_mask = False, get_names = False, balance = False):
         self.split_dict = {
             'train': 0,
             'val': 1,
@@ -37,7 +37,8 @@ class celebADataset(Dataset):
         self.get_names = get_names
         self.mask_path = mask_path
 
-        if phase == 'train':
+        if phase == 'train' and balance:
+            print ("Class-balancing the training set...")
             label0 = self.metadata_df.index[self.metadata_df['Blond_Hair'] == 0].tolist()
             label1 = self.metadata_df.index[self.metadata_df['Blond_Hair'] == 1].tolist()
             l = int(min(len(label0), len(label1)))
@@ -132,13 +133,13 @@ class celebADataset(Dataset):
 
 
 
-def get_dataset (phase, root_dir, mask_path, transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,0.5,0.5), (0.5, 0.5, 0.5))]), get_mask=False, get_names=False):
-    dataset = celebADataset(phase=phase, root_dir=root_dir, mask_path = mask_path, transform=transform, get_mask=get_mask, get_names=get_names)
+def get_dataset (phase, root_dir, mask_path, transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,0.5,0.5), (0.5, 0.5, 0.5))]), get_mask=False, get_names=False, balance = False):
+    dataset = celebADataset(phase=phase, root_dir=root_dir, mask_path = mask_path, transform=transform, get_mask=get_mask, get_names=get_names, balance = balance)
     print (len(dataset))
     return dataset
 
-def get_loader (root_dir,mask_path, phase, transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,0.5,0.5), (0.5, 0.5, 0.5))]), batch_size = 32, get_mask = False, get_names = False):
-    dataset = get_dataset(phase, root_dir, mask_path, transform, get_mask=get_mask, get_names=get_names)
+def get_loader (root_dir,mask_path, phase, transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,0.5,0.5), (0.5, 0.5, 0.5))]), batch_size = 32, get_mask = False, get_names = False, balance = False):
+    dataset = get_dataset(phase, root_dir, mask_path, transform, get_mask=get_mask, get_names=get_names, balance = balance)
     return DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=4)
 
 
@@ -170,14 +171,14 @@ def get_transform_celeba(train):
 
     return transform
 
-def get_celeba_loaders(path, mask_path, batch_size, get_mask=False, get_names=False, use_aug = False):
+def get_celeba_loaders(path, mask_path, batch_size, get_mask=False, get_names=False, use_aug = False, balance = False):
     if use_aug:
         transforms_train = get_transform_celeba(True)
     else:
         transforms_train = get_transform_celeba(False)
     transforms_test = get_transform_celeba(False)
 
-    trainloader = get_loader(path, mask_path, 'train', transform=transforms_train, batch_size=batch_size, get_mask=get_mask, get_names=get_names)
+    trainloader = get_loader(path, mask_path, 'train', transform=transforms_train, batch_size=batch_size, get_mask=get_mask, get_names=get_names, balance = balance)
     valloader = get_loader(path, mask_path, 'val', transform=transforms_test, batch_size=batch_size, get_mask=get_mask, get_names=get_names)
     testloader = get_loader(path, mask_path, 'test', transform=transforms_test, batch_size=batch_size, get_mask=get_mask, get_names=get_names)
 
